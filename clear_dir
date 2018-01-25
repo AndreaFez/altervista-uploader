@@ -1,0 +1,14 @@
+#!/bin/bash
+HOST='ftp.johng.altervista.org'
+USER="johng"
+PASSWD="***" #REPLACE WITH YOUR PASSWD
+REMOTEPATH='/'
+
+
+pftp -i -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+cd $REMOTEPATH
+mdel *
+quit
+END_SCRIPT

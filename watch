@@ -1,0 +1,28 @@
+#!/bin/bash
+
+RED='[0;31m'
+NC='[0m'
+
+base="$1"
+script_dir=$(pwd)
+cd $base
+
+old_md5=$(md5sum *)
+first_time="1"
+
+while true
+do
+	md5=$(md5sum *)
+	if [ "$first_time" == "1" ] || [ "$md5" != "$old_md5" ];then
+		#not equals.. delete remote files and reend all new onesy
+		first_time="0"
+		bash -c 'cd ${0} && ./clear_dir  && ./send ${1}' "$script_dir" "$base"
+		#old_md5=echo $md5
+		old_md5=$md5
+		echo "$(tput setaf 2)Watching..."
+	fi
+	
+	sleep .5
+done
+
+

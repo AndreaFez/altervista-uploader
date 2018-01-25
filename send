@@ -1,0 +1,13 @@
+#!/bin/bash
+#usage:this_script <directory>
+
+#updates all files contained in <directory> 
+base="$1"
+script_dir=$(pwd)
+cd $base
+for file in `ls`; do
+	$script_dir/one_send $file
+	#echo $file
+	#cat $file
+
+done
